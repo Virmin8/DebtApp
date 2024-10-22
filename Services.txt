@@ -1,11 +1,11 @@
-GolfPad 12 1 11 310.44
-GoogleOne 1 13 10 34.99
-Serengeti 1 1 10 500.00
-PlayMoreGolf 1 1 10 299.00
-DiscoveryBankSuite 1 7 10 219.00
-NewsServices 12 24 11 450.00
-ProtonPass 12 4 7 450.00
-AbsaAccount 1 12 10 57.00
-Patreon 1 1 10 45.00
-Netflix 1 1 10 199.00
-PlexPass 1 26 10 75.99
+GolfPad 12 1 11 2024 310.44 R
+GoogleOne 1 13 10 2024 34.99 R
+Serengeti 1 1 10 2024 500.00 R
+PlayMoreGolf 1 1 10 2024 299.00 R
+DiscoveryBankSuite 1 7 10 2024 219.00 R
+NewsServices 12 24 11 2024 450.00 $
+ProtonPass 12 4 7 2025 450.00 $
+AbsaAccount 1 12 10 2024 57.00 R
+Patreon 1 1 10 2024 45.00 R
+Netflix 1 1 10 2024 199.00 R
+PlexPass 1 26 10 2024 75.99 R

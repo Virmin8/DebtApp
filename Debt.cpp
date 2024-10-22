@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+
 
 #include "functions.h"
 #include "onlineservice.h"
@@ -6,9 +6,8 @@
 
 int main() {
 
-    std::time_t timestamp = std::time(0);
-    std::tm* now = std::localtime(&timestamp);
-
+    
+    tm* now = getTime();
     int day = now->tm_mday;
     int month = now->tm_mon + 1;
     int year = now->tm_year + 1900;
@@ -20,6 +19,7 @@ int main() {
    
     std::cout << "Would you like to load the default Service List? (y or n): ";
     std::cin >> answer;
+    std::cout << std::endl;
 
         if (answer == "n")
         {
@@ -29,31 +29,46 @@ int main() {
         }
     
 
-    float total = 0.00;
+    double total = 0.00;
     bool quit = false;
     
-    std::cout << "The Current Date is :" << day << "/" << month << "/" << year << std::endl << std::endl;
+    std::cout << "The Current Date is :" << day << "/" << month << "/" << year << "\n\n";
 
     ReadFromFile(strFilename, Services);
+    std::cout << "Would you like to view a list of your current Services? (y or n)";
+    std::cin >> answer;
 
-    for (int i = 0; i < Services.size(); i++)
+    if (answer == "y" || answer == "Y")
     {
-        Services[i].print();
+        std::cout << "Your current Services: \n";
+        for (int i = 0; i < Services.size(); i++)
+        {
+            Services[i].print();
 
+        }
     }
+   
+    total = RestMonthly(month, Services);
+    std::cout << "\nTotal Cost for the rest of the month: " << total << "\n";
+    total = RestYearly(Services);
+    std::cout << "Total Cost for the rest of the year: " << total << "\n\n";
     
 
     while (!quit)
     {
-        total = TotalMonthly(month,Services);
-        std::cout << std::endl << "Total Cost for the month: " << total << std::endl;
-        total = TotalYearly (Services);
-        std::cout << std::endl << "Total Cost for the year: " << total << std::endl;
+        std::cout << "List of Services for the Month: \n";
+        print(month, Services);
 
+        total = TotalMonthly(month,Services);
+        std::cout << std::endl << "Total Cost for the month: " << total << "\n";
+        total = TotalYearly(Services);
+        std::cout << "Total Cost for the year: " << total <<  "\n\n";
+        
         total = 0.00;
 
-        std::cout << "Please enter which month you would like to see the costs for (1-12) or Quit (q or Q): ";
+        std::cout << "\nPlease enter which month you would like to see the costs for (1-12) or Quit (q or Q): ";
         std::cin >> answer;
+        std::cout << "\n";
 
         if(answer == "q" || answer == "Q")
         {

@@ -12,18 +12,34 @@ private:
     int everyfemonths;
     int day;
     int month;
-    float cost;
+    int year;
+    double cost;
+    std::string symbol;
+    double costConverted;
+    void setPaid();
 
     
 public:
-    OnlineService(std::string, int, int, int, float);
+    OnlineService(std::string, int, int, int, int, double , std::string);
     ~OnlineService();
+
     int getDay();
     int getEveryfewMonths();
     int getMonth();
-    float getCost();
+    double getCost();
+    int getYear();
     std::string getName();
+    std::string  getSymbol();
+    double getCostConverted();
+    
+    void setDay(int);
+    void setEveryfewMonths(int);
     void setMonth(int);
+    void setCost(double);
+    void setYear(int);
+    void setName(std::string);
+    void setCostConverted(double);
+
     void print() const;
 };
 
