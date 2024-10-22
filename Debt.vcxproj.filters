@@ -18,24 +18,27 @@
     <ClCompile Include="Debt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Payment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="onlineservice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="F:\Coding\C++\App\Services.txt">
+    <ClCompile Include="functions.cpp">
       <Filter>Source Files</Filter>
-    </Text>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="payment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="onlineservice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Services.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="NewState.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -128,15 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debt.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="onlineservice.cpp" />
-    <ClCompile Include="Payment.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="F:\Coding\C++\App\Services.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="functions.h" />
     <ClInclude Include="onlineservice.h" />
-    <ClInclude Include="payment.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="NewState.txt" />
+    <Text Include="Services.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

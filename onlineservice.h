@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 class OnlineService
 {
@@ -11,7 +12,6 @@ private:
     int everyfemonths;
     int day;
     int month;
-    int year;
     float cost;
 
     
@@ -21,9 +21,10 @@ public:
     int getDay();
     int getEveryfewMonths();
     int getMonth();
-    int getYear();
     float getCost();
     std::string getName();
+    void setMonth(int);
+    void print() const;
 };
 
 #endif

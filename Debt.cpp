@@ -1,45 +1,71 @@
-#include <iostream>
-#include <fstream>
+#define _CRT_SECURE_NO_WARNINGS
+
+#include "functions.h"
 #include "onlineservice.h"
-#include "payment.h"
+#include <chrono>
 
 int main() {
 
+    std::time_t timestamp = std::time(0);
+    std::tm* now = std::localtime(&timestamp);
+
+    int day = now->tm_mday;
+    int month = now->tm_mon + 1;
+    int year = now->tm_year + 1900;
+    std::string answer;
+
     std::vector<OnlineService> Services;
+
     std::string strFilename("Services.txt");
-    std::ifstream fileIn;
+   
+    std::cout << "Would you like to load the default Service List? (y or n): ";
+    std::cin >> answer;
 
-    std::string servicename;
-    int everyfemonths = 0;
-    int day = 0;
-    int month = 0;
-    float cost;
-
-    fileIn.open(strFilename.c_str());
-    if (!fileIn.is_open())
-    {
-        std::cout << "File cannot be read!!" << std::endl;
-    }
-    else
-    {
-        while (fileIn >> servicename >> everyfemonths >> day >> month >> cost)
+        if (answer == "n")
         {
-            OnlineService onlineservices(servicename, everyfemonths, day, month, cost);
-            Services.push_back(onlineservices);
-        }
-    }
+            std::cout << "Please enter the correct filename: ";
+            std::cin >> strFilename;
 
-    if (fileIn.is_open())
-    {
-        fileIn.close();
-    }
+        }
+    
+
+    float total = 0.00;
+    bool quit = false;
+    
+    std::cout << "The Current Date is :" << day << "/" << month << "/" << year << std::endl << std::endl;
+
+    ReadFromFile(strFilename, Services);
 
     for (int i = 0; i < Services.size(); i++)
     {
-        std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() <<  std::endl;
+        Services[i].print();
+
     }
     
-    std::cout << "Total Cost for the month: " << monthly(Services) << std::endl;
 
+    while (!quit)
+    {
+        total = TotalMonthly(month,Services);
+        std::cout << std::endl << "Total Cost for the month: " << total << std::endl;
+        total = TotalYearly (Services);
+        std::cout << std::endl << "Total Cost for the year: " << total << std::endl;
+
+        total = 0.00;
+
+        std::cout << "Please enter which month you would like to see the costs for (1-12) or Quit (q or Q): ";
+        std::cin >> answer;
+
+        if(answer == "q" || answer == "Q")
+        {
+            quit = true;
+        }
+        else
+        {
+            month = stoi(answer);
+        }
+        
+    }
+
+    WriteToFile(Services);
     return 0;
 }

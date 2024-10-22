@@ -16,15 +16,20 @@ int OnlineService::getEveryfewMonths(){
 int OnlineService::getMonth(){
     return month;
 }
-int OnlineService::getYear(){
-    return year;
-}
 float OnlineService::getCost(){
     return cost;
 }
 std::string OnlineService::getName()
 {
     return name;
+}
+void OnlineService::setMonth(int _month)
+{
+    month = _month;
+}
+void OnlineService::print() const
+{
+    std::cout << name << " Costs: " << cost << ". Next Payment Due: " << day << "/" << month << std::endl;
 }
 OnlineService::~OnlineService()
 {
