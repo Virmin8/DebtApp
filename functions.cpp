@@ -1,9 +1,10 @@
 #include "functions.h"
 #include <iostream>
 
-void ReadFromFile(std::string name,std::vector<OnlineService> &service)
+void ReadFromFile(std::vector<OnlineService> &service)
 {
     std::string servicename;
+    std::string filename = "UserServices.txt";
     int months;
     int day;
     int month;
@@ -12,19 +13,31 @@ void ReadFromFile(std::string name,std::vector<OnlineService> &service)
     std::string  symbol;
 
     std::ifstream fileIn;
-    fileIn.open(name.c_str());
+    fileIn.open(filename.c_str());
     if (!fileIn.is_open())
     {
-        std::cout << "File cannot be read!!" << std::endl;
+        std::cout << "First Run, Loading Defaults!!\n\n";
+        filename = "Services.txt";
+        fileIn.open(filename.c_str());
+        if (!fileIn.is_open())
+        {
+            std::cout << "Error Loading Defaults, Closing Program!!";
+            // Needs to be implemented!!
+
+        }
+
     }
     else
     {
+        std::cout << "Resuming from Last Session!!\n\n";
+    }
+    
         while (fileIn >> servicename >> months >> day >> month >> year >> cost >> symbol)
         {
             OnlineService onlineservices(servicename, months, day, month, year, cost, symbol);
             service.push_back(onlineservices);
         }
-    }
+    
 
     if (fileIn.is_open())
     {
@@ -35,27 +48,25 @@ void ReadFromFile(std::string name,std::vector<OnlineService> &service)
 
 void WriteToFile(std::vector<OnlineService>& Services)
 {
-    std::string answer;
+    std::string filename = "UserServices.txt";
     std::ofstream fileout;
 
-    std::cout << "Would you like to save changes to the Services? (y or n): ";
-    std::cin >> answer;
- 
-
-    if (answer == "y" || answer == "Y")
-    {
-        std::cout << "Please enter filename: ";
-        std::cin >> answer;
-        fileout.open(answer);
+   
+   
+    std::cout << "Saving!!\n\n";
+    
+    
+        
+        fileout.open(filename);
         if (!fileout.is_open())
         {
-            std::cout << "File cannot be read!!" << std::endl;
+            std::cout << "File cannot be read!!" << std::endl; //Needs error implementation, on what the program should do 
         }
         else
         {
             for (int i = 0; i < Services.size(); i++)
             {
-                fileout << Services[i].getName() << " " << Services[i].getEveryfewMonths() << " " << Services[i].getDay() << " " << Services[i].getMonth() << " " << Services[i].getCost() << std::endl;
+                fileout << Services[i].getName() << " " << Services[i].getEveryfewMonths() << " " << Services[i].getDay() << " " << Services[i].getMonth() << " " << Services[i].getYear() << " " << Services[i].getCost() << " " << Services[i].getSymbol() << std::endl;
 
             }
             if (fileout.is_open())
@@ -63,7 +74,7 @@ void WriteToFile(std::vector<OnlineService>& Services)
                 fileout.close();
             }
         }
-    }
+    
 }
 
 double TotalMonthly(int month, std::vector<OnlineService>& Services)
@@ -133,7 +144,7 @@ void print(int month, std::vector<OnlineService>& Services)
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
 
-            std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() << " Next Payment Due: " << Services[i].getDay() << "/" << Services[i].getMonth() << "/" << Services[i].getYear() << "\n";
+            std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() << " Next Payment Due: " << Services[i].getDay() << "/" << month << "/" << Services[i].getYear() << "\n";
         }
     }
 }

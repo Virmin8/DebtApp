@@ -1,4 +1,6 @@
-
+//add and remove services
+//currency converter via online api
+//work on app version, backend seems pretty much done
 
 #include "functions.h"
 #include "onlineservice.h"
@@ -15,32 +17,18 @@ int main() {
 
     std::vector<OnlineService> Services;
 
-    std::string strFilename("Services.txt");
-   
-    std::cout << "Would you like to load the default Service List? (y or n): ";
-    std::cin >> answer;
-    std::cout << std::endl;
-
-        if (answer == "n")
-        {
-            std::cout << "Please enter the correct filename: ";
-            std::cin >> strFilename;
-
-        }
-    
-
     double total = 0.00;
     bool quit = false;
     
     std::cout << "The Current Date is :" << day << "/" << month << "/" << year << "\n\n";
 
-    ReadFromFile(strFilename, Services);
-    std::cout << "Would you like to view a list of your current Services? (y or n)";
+    ReadFromFile(Services);
+    std::cout << "Would you like to view a list of your current Services? (y or n): "; //Needs user checks!!
     std::cin >> answer;
 
-    if (answer == "y" || answer == "Y")
+    if (answer == "y" || answer == "Y") 
     {
-        std::cout << "Your current Services: \n";
+        std::cout << "\nYour current Services: \n";
         for (int i = 0; i < Services.size(); i++)
         {
             Services[i].print();
@@ -66,7 +54,7 @@ int main() {
         
         total = 0.00;
 
-        std::cout << "\nPlease enter which month you would like to see the costs for (1-12) or Quit (q or Q): ";
+        std::cout << "\nPlease enter which month you would like to see the costs for (1-12) or Quit (q or Q): "; //Needs user checks!!
         std::cin >> answer;
         std::cout << "\n";
 

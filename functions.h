@@ -9,7 +9,7 @@
 
 tm* getTime();
 
-void ReadFromFile(std::string, std::vector<OnlineService>&);
+void ReadFromFile(std::vector<OnlineService>&);
 void WriteToFile(std::vector<OnlineService>&);
 
 double TotalMonthly(int, std::vector<OnlineService>&);
