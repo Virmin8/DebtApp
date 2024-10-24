@@ -1,4 +1,5 @@
 //add and remove services
+//add indicator that service was paid for, for the month
 //currency converter via online api
 //work on app version, backend seems pretty much done
 

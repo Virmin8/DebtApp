@@ -110,6 +110,7 @@ tm* getTime()
 
     return now;
 }
+
 double RestMonthly(int month, std::vector<OnlineService>& Services)
 {
     tm* time = getTime();

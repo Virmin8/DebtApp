@@ -16,7 +16,8 @@ private:
     double cost;
     std::string symbol;
     double costConverted;
-    void setPaid();
+    void rollOver();
+    bool paid;
 
     
 public:
@@ -31,6 +32,7 @@ public:
     std::string getName();
     std::string  getSymbol();
     double getCostConverted();
+    bool getPaid();
     
     void setDay(int);
     void setEveryfewMonths(int);
@@ -39,6 +41,7 @@ public:
     void setYear(int);
     void setName(std::string);
     void setCostConverted(double);
+    void setPaid(bool);
 
     void print() const;
 };
