@@ -1,6 +1,7 @@
 //add and remove services. Done (just need to ask user if he wants to add or remove)
-//currency converter via online api
-//work on app version, backend seems pretty much done
+// Need to add user restrictions
+// Currency converter via online api
+// work on app version, backend seems pretty much done
 
 #include "functions.h"
 #include "onlineservice.h"
@@ -14,6 +15,7 @@ int main() {
     int month = now->tm_mon + 1;
     int year = now->tm_year + 1900;
     std::string answer;
+    int count = 0;
 
     std::vector<OnlineService> Services;
 
@@ -33,17 +35,20 @@ int main() {
     //addService(Services);  Ask for user input
     //removeService(Services); //Ask for user input
 
-
-    total = RestMonthly(month, Services);
-    std::cout << "\nTotal Cost for the rest of the month: " << total << "\n";
-    total = RestYearly(Services);
-    std::cout << "Total Cost for the rest of the year: " << total << "\n\n";
-    
-
     while (!quit)
     {
-        std::cout << "List of Services for the Month: \n";
+        std::cout << "\nList of Services for the Month: \n";
         print(month, Services);
+        total = RestMonthly(month, Services);
+
+        if(count == 0)
+        {
+            std::cout << "\nTotal Cost for the rest of the month: " << total << "\n";
+            total = RestYearly(Services);
+            std::cout << "Total Cost for the rest of the year: " << total << "\n";
+            count++;
+        }
+        
 
         total = TotalMonthly(month,Services);
         std::cout << std::endl << "Total Cost for the month: " << total << "\n";
