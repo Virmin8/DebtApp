@@ -21,6 +21,8 @@ void ListServices(std::vector<OnlineService>&);
 
 void addService(std::vector<OnlineService>&);
 void removeService(std::vector<OnlineService>&);
-void servicePaid(std::vector<OnlineService>&);
+
+
+
 
 #endif

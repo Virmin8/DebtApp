@@ -144,15 +144,32 @@ void print(int month, std::vector<OnlineService>& Services)
     int tmpmonth = time->tm_mon + 1;
     int year = 0;
     int tmpday = time->tm_mday;
+    int tmpyear = time->tm_year + 1900;
+    bool paid = false;
+
+    
+
     if (month < tmpmonth)
     {
         year = 1;
     }
+   
+
     for (int i = 0; i < Services.size(); i++)
     {
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-            std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() << " Next Payment Due: " << Services[i].getDay() << "/" << month << "/" << Services[i].getYear() + year << "\n";
+            if (Services[i].getDay() < tmpday && month + 1== Services[i].getMonth() && tmpyear == Services[i].getYear()) //month + 1 to account for the rollover
+            {
+                paid = true;
+            }
+            else
+            { 
+                paid = false;
+            }
+                
+
+            Services[i].print(month, year, paid);
         }
     }
 }
@@ -227,7 +244,3 @@ void removeService(std::vector<OnlineService>& Services)
 
 }
 
-void servicePaid(std::vector<OnlineService>&)
-{
-
-}
