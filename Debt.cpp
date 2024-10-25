@@ -1,6 +1,4 @@
 //add and remove services. Done (just need to ask user if he wants to add or remove)
-//add indicator that service was paid for, for the month
-
 //currency converter via online api
 //work on app version, backend seems pretty much done
 
@@ -33,7 +31,7 @@ int main() {
         ListServices(Services);
     }
     //addService(Services);  Ask for user input
-    removeService(Services); //Ask for user input
+    //removeService(Services); //Ask for user input
 
 
     total = RestMonthly(month, Services);

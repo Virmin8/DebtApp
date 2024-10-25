@@ -57,8 +57,6 @@ double OnlineService::getCostConverted()
     return costConverted;
 }
 
-
-
 void OnlineService::rollOver()
 {
     tm* time = getTime();
@@ -94,7 +92,6 @@ void OnlineService::setDay(int _day) {
     day = _day;
 }
 
-
 void OnlineService::setEveryfewMonths(int _every)
 {
     everyfemonths = _every;
@@ -120,10 +117,12 @@ void OnlineService::print()
     
     std::cout << name << " Costs: " << cost << " Next Payment Due: " << day << "/" << month << "/" << year << "\n";
 }
-void OnlineService::print(int _month, int _year, bool _paid)
+
+void OnlineService::print(int _month, int _year, std::string _paid)
 {
     std::cout << name << " Costs: " << cost << " Next Payment Due: " << day << "/" << _month << "/" << year + _year << " Paid: " << _paid << "\n";
 }
+
 void OnlineService::setCostConverted(double _costConverted)
 {
     costConverted = _costConverted;

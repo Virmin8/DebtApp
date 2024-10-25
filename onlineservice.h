@@ -42,7 +42,7 @@ public:
     
 
     void print();
-    void print(int, int, bool);
+    void print(int, int, std::string);
 };
 
 #endif

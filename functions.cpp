@@ -145,15 +145,12 @@ void print(int month, std::vector<OnlineService>& Services)
     int year = 0;
     int tmpday = time->tm_mday;
     int tmpyear = time->tm_year + 1900;
-    bool paid = false;
-
-    
+    std::string paid;
 
     if (month < tmpmonth)
     {
         year = 1;
     }
-   
 
     for (int i = 0; i < Services.size(); i++)
     {
@@ -161,15 +158,18 @@ void print(int month, std::vector<OnlineService>& Services)
         {
             if (Services[i].getDay() < tmpday && month + 1== Services[i].getMonth() && tmpyear == Services[i].getYear()) //month + 1 to account for the rollover
             {
-                paid = true;
+                SetColour(92);
+                paid = "Yes";
             }
             else
             { 
-                paid = false;
+                paid = "No";
+                SetColour(91);
             }
                 
 
             Services[i].print(month, year, paid);
+            ResetColour();
         }
     }
 }

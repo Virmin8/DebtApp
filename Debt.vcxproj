@@ -130,10 +130,12 @@
     <ClCompile Include="Debt.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="onlineservice.cpp" />
+    <ClCompile Include="TextColour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
     <ClInclude Include="onlineservice.h" />
+    <ClInclude Include="TextColour.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="NewState.txt" />
