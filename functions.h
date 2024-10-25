@@ -14,8 +14,13 @@ void WriteToFile(std::vector<OnlineService>&);
 
 double TotalMonthly(int, std::vector<OnlineService>&);
 double TotalYearly(std::vector<OnlineService>&);
-double RestMonthly(int month, std::vector<OnlineService>& Services);
+double RestMonthly(int, std::vector<OnlineService>&);
 double RestYearly(std::vector<OnlineService>&);
 void print(int,std::vector<OnlineService>&);
+void ListServices(std::vector<OnlineService>&);
+
+void addService(std::vector<OnlineService>&);
+void removeService(std::vector<OnlineService>&);
+void servicePaid(std::vector<OnlineService>&);
 
 #endif

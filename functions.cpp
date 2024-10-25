@@ -140,13 +140,94 @@ double RestYearly(std::vector<OnlineService>& Services)
 
 void print(int month, std::vector<OnlineService>& Services)
 {
+    tm* time = getTime();
+    int tmpmonth = time->tm_mon + 1;
+    int year = 0;
+    int tmpday = time->tm_mday;
+    if (month < tmpmonth)
+    {
+        year = 1;
+    }
     for (int i = 0; i < Services.size(); i++)
     {
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-
-            std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() << " Next Payment Due: " << Services[i].getDay() << "/" << month << "/" << Services[i].getYear() << "\n";
+            std::cout << Services[i].getName() << " Costs: " << Services[i].getCost() << " Next Payment Due: " << Services[i].getDay() << "/" << month << "/" << Services[i].getYear() + year << "\n";
         }
     }
 }
-    
+
+void ListServices(std::vector<OnlineService>& Services)
+{
+    std::cout << "\nYour current Services: \n";
+    for (int i = 0; i < Services.size(); i++)
+    {
+        Services[i].print();
+
+    }
+
+}
+
+void addService(std::vector<OnlineService>& Services)
+{
+    std::string name;
+    int everyfemonths;
+    int day;
+    int month;
+    int year;
+    double cost;
+    std::string symbol;
+    std::cout << "\nAdding new Service:";
+    std::cout << "\nPlease enter service name? :";
+    std::cin >> name;
+    std::cout << "Please enter every few months? :";
+    std::cin >> everyfemonths;
+    std::cout << "Please enter payment day: ";
+    std::cin >> day;
+    std::cout << "Please enter payment month? :";
+    std::cin >> month;
+    std::cout << "Please enter payment year? :";
+    std::cin >> year;
+    std::cout << "Please enter payment cost? :";
+    std::cin >> cost;
+    std::cout << "Please enter Currency Symbol? :";
+    std::cin >> symbol;
+
+    OnlineService tmp(name, everyfemonths, day, month, year, cost, symbol);
+    Services.push_back(tmp);
+}
+
+void removeService(std::vector<OnlineService>& Services)
+{
+    std::string name;
+
+    std::cout << "\nPlease enter the Service name you wish to remove, the options are: ";
+
+    for (int i = 0; i < Services.size(); i++)
+    {
+        std::cout << "\n" << Services[i].getName();
+
+    }
+    std::cout << "\n";
+    std::cin >> name;
+
+    for (int i = 0; i < Services.size(); i++)
+    {
+        if (name == Services[i].getName())
+        {
+            Services.erase(Services.begin() + i);
+        }
+
+    }
+
+   
+    ListServices(Services);
+
+
+
+}
+
+void servicePaid(std::vector<OnlineService>&)
+{
+
+}

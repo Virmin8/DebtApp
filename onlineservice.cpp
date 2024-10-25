@@ -102,6 +102,7 @@ void OnlineService::setDay(int _day) {
     day = _day;
 }
 
+
 void OnlineService::setEveryfewMonths(int _every)
 {
     everyfemonths = _every;
