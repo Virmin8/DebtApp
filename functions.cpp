@@ -156,7 +156,7 @@ void print(int month, std::vector<OnlineService>& Services)
     {
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-            if (Services[i].getDay() <= tmpday && month + 1== Services[i].getMonth() && tmpyear == Services[i].getYear()) //month + 1 to account for the rollover
+            if (Services[i].getDay() <= tmpday && month + 1== Services[i].getMonth() && tmpyear <= Services[i].getYear()) //month + 1 to account for the rollover
             {
                 SetColour(92);
                 paid = "Yes";

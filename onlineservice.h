@@ -14,9 +14,10 @@ private:
     int month;
     int year;
     double cost;
+    double currencyConverter(std::string _currency);
     std::string symbol;
-    double costConverted;
     void rollOver();
+    int length;
 
     
 public:
@@ -30,7 +31,7 @@ public:
     int getYear();
     std::string getName();
     std::string  getSymbol();
-    double getCostConverted();
+    int getLength();
     
     void setDay(int);
     void setEveryfewMonths(int);
@@ -38,7 +39,7 @@ public:
     void setCost(double);
     void setYear(int);
     void setName(std::string);
-    void setCostConverted(double);
+    void setLength(int);
     
 
     void print();

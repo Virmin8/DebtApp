@@ -1,5 +1,10 @@
 #include "onlineservice.h"
 #include "functions.h"
+#include "cpr/cpr.h"
+#include "nlohmann/json.hpp"
+#include <cstring>
+
+using json = nlohmann::json;
 
 OnlineService::OnlineService(std::string  _name, int _everyfemonths, int _day, int _month, int _year, double _cost, std::string _symbol)
 {
@@ -7,13 +12,37 @@ OnlineService::OnlineService(std::string  _name, int _everyfemonths, int _day, i
     everyfemonths = _everyfemonths;
     day = _day;
     month = _month;
-    cost = _cost;
     year = _year;
     symbol = _symbol;
-    costConverted = 0.00;
+    cost = _cost;
+    if (symbol != "ZAR")
+    {
+    std::string s = symbol;
+    for (auto& x : s) {
+        x = tolower(x);
+    }
+
+        cost = cost * currencyConverter(s);
+    }
     rollOver();
+    length = 0;
     
     
+}
+
+
+double OnlineService::currencyConverter(std::string _currency)
+{
+    std::string date = "latest";
+    std::string currency = _currency;
+    std::string endpoint = currency + ".json";
+    std::string url = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + endpoint;
+
+    cpr::Response r = cpr::Get(cpr::Url{ url });
+    json tmp = json::parse(r.text);
+    auto total = tmp[currency]["zar"];
+    return total;
+
 }
 
 int OnlineService::getDay() {
@@ -52,9 +81,9 @@ std::string OnlineService::getSymbol()
     return symbol;
 }
 
-double OnlineService::getCostConverted()
+int OnlineService::getLength()
 {
-    return costConverted;
+    return length;
 }
 
 void OnlineService::rollOver()
@@ -115,7 +144,7 @@ void OnlineService::setName(std::string _name)
 void OnlineService::print() 
 {
     
-    std::cout << name << " Costs: " << cost << " Next Payment Due: " << day << "/" << month << "/" << year << "\n";
+    std::cout << name << " Costs: " << cost  << " Next Payment Due: " << day << "/" << month << "/" << year << "\n";
 }
 
 void OnlineService::print(int _month, int _year, std::string _paid)
@@ -123,9 +152,10 @@ void OnlineService::print(int _month, int _year, std::string _paid)
     std::cout << name << " Costs: " << cost << " Next Payment Due: " << day << "/" << _month << "/" << year + _year << " Paid: " << _paid << "\n";
 }
 
-void OnlineService::setCostConverted(double _costConverted)
+
+void OnlineService::setLength(int _length)
 {
-    costConverted = _costConverted;
+    length = _length;
 }
 
 

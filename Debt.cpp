@@ -1,14 +1,14 @@
 //add and remove services. Done (just need to ask user if he wants to add or remove)
 // Need to add user restrictions
-// Currency converter via online api
 // work on app version, backend seems pretty much done
+// add short term Service
 
 #include "functions.h"
 #include "onlineservice.h"
 #include <chrono>
 
-int main() {
 
+int main() {
     
     tm* now = getTime();
     int day = now->tm_mday;
@@ -32,6 +32,7 @@ int main() {
     {
         ListServices(Services);
     }
+
     //addService(Services);  Ask for user input
     //removeService(Services); //Ask for user input
 
