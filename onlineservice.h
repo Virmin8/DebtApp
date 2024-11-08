@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "cpr/cpr.h"
+#include "nlohmann/json.hpp"
+#include <cstring>
 
 class OnlineService
 {

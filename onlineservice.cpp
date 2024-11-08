@@ -1,8 +1,6 @@
 #include "onlineservice.h"
 #include "functions.h"
-#include "cpr/cpr.h"
-#include "nlohmann/json.hpp"
-#include <cstring>
+
 
 using json = nlohmann::json;
 
