@@ -29,7 +29,6 @@ OnlineService::OnlineService(std::string  _name, int _everyfemonths, int _day, i
     
 }
 
-
 double OnlineService::currencyConverter(std::string _currency)
 {
     std::string date = "latest";
@@ -55,10 +54,12 @@ int OnlineService::getEveryfewMonths(){
 int OnlineService::getMonth(){
     return month;
 }
+
 double OnlineService::getConvertedCost()
 {
     return convertedCost;
 }
+
 double OnlineService::getCost(){
     
         return cost;
@@ -198,13 +199,10 @@ void OnlineService::print(int _month, int _year, std::string _paid)
     std::cout << name << " Costs: " << totalCost << " Next Payment Due: " << day << "/" << _month << "/" << year + _year << " Paid: " << _paid << " " << everyfemonths << "\n";
 }
 
-
 void OnlineService::setLength(int _length)
 {
     length = _length;
 }
-
-
 
 OnlineService::~OnlineService()
 {

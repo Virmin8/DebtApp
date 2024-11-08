@@ -4,7 +4,6 @@
 // add short term Service
 // Optimize code, duplicating to many if functions
 // Add Self Hosted Database
-// Optimize include, so no duplicates are found
 
 #include "functions.h"
 #include "onlineservice.h"
