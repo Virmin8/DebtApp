@@ -15,6 +15,7 @@ OnlineService::OnlineService(std::string  _name, int _everyfemonths, int _day, i
     year = _year;
     symbol = _symbol;
     cost = _cost;
+    convertedCost = 0;
     if (symbol != "ZAR")
     {
     std::string s = symbol;
@@ -22,7 +23,7 @@ OnlineService::OnlineService(std::string  _name, int _everyfemonths, int _day, i
         x = tolower(x);
     }
 
-        cost = cost * currencyConverter(s);
+        convertedCost = cost * currencyConverter(s);
     }
     rollOver();
     length = 0;
@@ -56,9 +57,14 @@ int OnlineService::getEveryfewMonths(){
 int OnlineService::getMonth(){
     return month;
 }
-
+double OnlineService::getConvertedCost()
+{
+    return convertedCost;
+}
 double OnlineService::getCost(){
-    return cost;
+    
+        return cost;
+    
 }
 
 std::string OnlineService::getName()
@@ -89,31 +95,55 @@ int OnlineService::getLength()
 void OnlineService::rollOver()
 {
     tm* time = getTime();
-    
- 
-    
- 
-    if (day <= time->tm_mday && month <= time->tm_mon + 1 && year <= time->tm_year + 1900)
-    {
 
-        if (everyfemonths == 1)
+    
+    
+        if (month < time->tm_mon + 1)
         {
-            month = time->tm_mon + 2;
-            if (month % 12 == 0)
+            if (everyfemonths == 1)
             {
-                month = 12;
+                month = time->tm_mon + 2;
+                if (month % 12 == 0)
+                {
+                    month = 12;
+                }
+                if (month % 12 == 1)
+                {
+                    month = 1;
+                    year = year + 1;
+                }
             }
-            if (month % 12 == 1)
-            {   
-                month = 1;
-                year = year + 1;
+            if (everyfemonths == 12)
+            {
+                year = time->tm_year + 1901;
             }
+
         }
-        if (everyfemonths == 12)
+        else if (month == time->tm_mon + 1 && day <= time->tm_mday)
         {
-        year = time->tm_year + 1901;
+            if (everyfemonths == 1)
+            {
+                month = time->tm_mon + 2;
+                if (month % 12 == 0)
+                {
+                    month = 12;
+                }
+                if (month % 12 == 1)
+                {
+                    month = 1;
+                    year = year + 1;
+                }
+            }
+            if (everyfemonths == 12)
+            {
+                year = time->tm_year + 1901;
+            }
         }
-    }
+    
+    
+        
+    
+    
     
 }
 
@@ -143,13 +173,31 @@ void OnlineService::setName(std::string _name)
 
 void OnlineService::print() 
 {
-    
-    std::cout << name << " Costs: " << cost  << " Next Payment Due: " << day << "/" << month << "/" << year << "\n";
+    double totalCost;
+    if (convertedCost == 0)
+    {
+        totalCost = cost;
+    }
+    else
+    {
+        totalCost = convertedCost;
+    }
+
+    std::cout << name << " Costs: " << totalCost  << " Next Payment Due: " << day << "/" << month << "/" << year << " " << everyfemonths << "\n";
 }
 
 void OnlineService::print(int _month, int _year, std::string _paid)
 {
-    std::cout << name << " Costs: " << cost << " Next Payment Due: " << day << "/" << _month << "/" << year + _year << " Paid: " << _paid << "\n";
+    double totalCost;
+    if (convertedCost == 0)
+    {
+        totalCost = cost;
+    }
+    else
+    {
+        totalCost = convertedCost;
+    }
+    std::cout << name << " Costs: " << totalCost << " Next Payment Due: " << day << "/" << _month << "/" << year + _year << " Paid: " << _paid << " " << everyfemonths << "\n";
 }
 
 

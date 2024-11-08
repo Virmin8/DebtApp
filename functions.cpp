@@ -86,7 +86,14 @@ double TotalMonthly(int month, std::vector<OnlineService>& Services)
     {
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-            total = total + Services[i].getCost();
+            if (Services[i].getConvertedCost() == 0)
+            {
+                total += Services[i].getCost();
+            }
+            else
+            {
+                total += Services[i].getConvertedCost();
+            }
             
         }
     }
@@ -114,13 +121,24 @@ tm* getTime()
 double RestMonthly(int month, std::vector<OnlineService>& Services)
 {
     tm* time = getTime();
-
     double total = 0.00;
     for (int i = 0; i < Services.size(); i++)
     {
-        if (Services[i].getMonth() == month && Services[i].getYear() == time->tm_year + 1900)
+        if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-            total = total + Services[i].getCost();
+            
+            if (Services[i].getDay() >= time->tm_mday)
+            {
+                if (Services[i].getConvertedCost() == 0)
+                {
+                    total += Services[i].getCost();
+                }
+                else
+                {
+                    total += Services[i].getConvertedCost();
+                }
+            }
+
         }
     }
     return total;
@@ -142,36 +160,41 @@ void print(int month, std::vector<OnlineService>& Services)
 {
     tm* time = getTime();
     int tmpmonth = time->tm_mon + 1;
-    int year = 0;
     int tmpday = time->tm_mday;
     int tmpyear = time->tm_year + 1900;
-    std::string paid;
+    
 
-    if (month < tmpmonth)
-    {
-        year = 1;
-    }
-
+    
     for (int i = 0; i < Services.size(); i++)
     {
+        int year = 0;
+        std::string paid = "No";
+        SetColour(91);
+
         if (Services[i].getMonth() == month || Services[i].getEveryfewMonths() == 1)
         {
-            if (Services[i].getDay() <= tmpday && month + 1== Services[i].getMonth() && tmpyear <= Services[i].getYear()) //month + 1 to account for the rollover
-            {
-                SetColour(92);
-                paid = "Yes";
-            }
-            else
-            { 
-                paid = "No";
-                SetColour(91);
-            }
-                
-
+                if (month < time->tm_mon + 1)
+                {
+                    SetColour(92);
+                    paid = "Yes";
+                }
+                else if (month == time->tm_mon + 1 && Services[i].getDay() <= time->tm_mday)
+                {
+                    SetColour(92);
+                    paid = "Yes";
+                }
+                if (Services[i].getEveryfewMonths() == 12)
+                {
+                    year = -1;
+                }
+          
             Services[i].print(month, year, paid);
             ResetColour();
+           
         }
+        
     }
+    
 }
 
 void ListServices(std::vector<OnlineService>& Services)

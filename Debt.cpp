@@ -2,6 +2,8 @@
 // Need to add user restrictions
 // work on app version, backend seems pretty much done
 // add short term Service
+// Optimize code, duplicating to many if functions
+// Add Self Hosted Database
 
 #include "functions.h"
 #include "onlineservice.h"

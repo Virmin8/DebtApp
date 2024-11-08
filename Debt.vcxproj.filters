@@ -43,8 +43,5 @@
     <Text Include="Services.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="NewState.txt">
-      <Filter>Source Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

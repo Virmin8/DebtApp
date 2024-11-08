@@ -18,6 +18,7 @@ private:
     std::string symbol;
     void rollOver();
     int length;
+    double convertedCost;
 
     
 public:
@@ -32,7 +33,7 @@ public:
     std::string getName();
     std::string  getSymbol();
     int getLength();
-    
+    double getConvertedCost();
     void setDay(int);
     void setEveryfewMonths(int);
     void setMonth(int);
